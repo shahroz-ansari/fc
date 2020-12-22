@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import LoginWithGoogle from "./components/core/loginWithGoogle";
+import AuthenticationView from "./components/views/auth";
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
         isAuthenticated ? <Switch>
           <Route path="/">List of groups</Route>
         </Switch> : <Switch>
-          <Route path="/" component={LoginWithGoogle} />
+          <Route path="/" component={AuthenticationView} />
         </Switch>
       }
     </BrowserRouter>
