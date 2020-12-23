@@ -1,47 +1,60 @@
-import { batchPut, getDocsStartsWith } from './pouchdb';
-import { FRIEND_DB_PREFIX, GROUP_DB_PREFIX, INVITATION_DB_PREFIX } from '../constants';
 
-const setDocs = async function(docs, prefix) {
-    if (!Array.isArray(docs)) return false;
+import { FRIEND_DB_IDENTIFIER, GROUP_DB_IDENTIFIER, INVITATION_DB_IDENTIFIER } from '../constants';
+import { put, get } from './pouchdb';
+
+const dumpData = async function(data, identifier) {
+    let doc;
     try {
-        await batchPut(docs, prefix)
-        return true;
-    } catch(err) {
-        console.log(err)
-        return false;
+        doc = await get(identifier);
+    }   finally {
+        if (doc) {
+            doc.data = data;
+        } else {
+            doc = {
+                _id: identifier,
+                data
+            }
+        }
+        try {
+            await put(doc);
+            return true;
+        } catch(err) {
+            console.log(err)
+            return false;
+        }
     }
 }
 
-const getDocs = async function(prefix) {
+const getDumpData = async function(identifier) {
     try {
-        const friends = await getDocsStartsWith(prefix)
-        return friends;
+        const doc = await get(identifier);
+        return doc;
     } catch(err) {
         console.log(err)
         return null
     }
 }
 
-export const setFriendList = async function(list) {
-    return setDocs(list, FRIEND_DB_PREFIX);
+export const setFriendList = async function(data) {
+    return dumpData(data, FRIEND_DB_IDENTIFIER);
 }
 
 export const getFriendList = async function() {
-    return getDocs(FRIEND_DB_PREFIX)
+    return getDumpData(FRIEND_DB_IDENTIFIER)
 }
 
-export const setGroupList = async function(list) {
-    return setDocs(list, GROUP_DB_PREFIX);
+export const setGroupList = async function(data) {
+    return dumpData(data, GROUP_DB_IDENTIFIER);
 }
 
 export const getGroupList = async function() {
-    return getDocs(GROUP_DB_PREFIX)
+    return getDumpData(GROUP_DB_IDENTIFIER)
 }
 
-export const setInvitationList = async function(list) {
-    return setDocs(list, INVITATION_DB_PREFIX);
+export const setInvitationList = async function(data) {
+    return dumpData(data, INVITATION_DB_IDENTIFIER);
 }
 
 export const getInvitationList = async function() {
-    return getDocs(INVITATION_DB_PREFIX)
+    return getDumpData(INVITATION_DB_IDENTIFIER)
 }
