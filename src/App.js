@@ -1,11 +1,16 @@
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import HomeLayout from "./components/layout/home";
 import AuthenticationView from "./components/views/auth";
 import GroupsView from "./components/views/groups";
+import { authentication } from "./store";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(authentication.value)
+  useEffect(() => {
+    authentication.subscribe(setIsAuthenticated)
+  }, [])
 
-  const isAuthenticated = true;
   return (
     <BrowserRouter>
       {
