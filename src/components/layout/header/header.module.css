@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 1px 10px #3b383855;
+}
+.go_back, .menu {
+    cursor: pointer;
+    padding: 5px;
+    /* border: 1px solid red; */
+}
+.logo {
+    font-size: 35px;
+    font-weight: 7000;
+    margin-left: 10px;
+    color: #009688;
+}
+.channel {
+    flex-grow: 1;
+    margin: 0 10px;
+    /* border: 1px solid red; */
+}
+    .channel_name {
+        font-size: 20px;
+        /* margin-bottom: 5px; */
+    }
+    .channel_info {
+        font-size: 15px;
+    }

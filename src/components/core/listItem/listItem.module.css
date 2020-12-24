@@ -1,0 +1,35 @@
+.item {
+    display: flex;
+    align-items: center;
+    /* background-color: #f2f2f2; */
+    border-bottom: 1px solid #00968811;
+    margin: 0 20px;
+    padding: 20px 0;
+}
+
+.image_box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(233, 122, 255, 0.24);
+}
+
+.info_box {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+    .name {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .message {
+        font-size: 15px;
+    }
+
+.count {
+    padding: 5px 10px;
+    background-color: #009688;
+    color: #f2f2f2;
+    border-radius: 50%;
+    /* clip-path: circle(); */
+}
