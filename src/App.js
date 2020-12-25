@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import HomeLayout from "./components/layout/home";
 import AuthenticationView from "./components/views/auth";
+import GroupsView from "./components/views/groups";
 import { authentication } from "./store";
 
 function App() {
@@ -12,9 +14,16 @@ function App() {
   return (
     <BrowserRouter>
       {
-        isAuthenticated ? <Switch>
-          <Route path="/">List of groups</Route>
-        </Switch> : <Switch>
+        isAuthenticated ? <HomeLayout>
+          <Switch>
+            <Route path="/r2" exact render={function() {
+              return <div>
+                <Link to="/">Route 1</Link>
+              </div>
+            }}></Route>
+            <Route path="/" exact><GroupsView /></Route>
+          </Switch>
+        </HomeLayout> : <Switch>
           <Route path="/" component={AuthenticationView} />
         </Switch>
       }
