@@ -2,3 +2,12 @@
     flex-grow: 1;
     overflow-y: scroll;
 }
+
+.add_button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    box-shadow: 5px 10px 20px -5px rgb(0, 0, 0, .7);
+    border-radius: 50%;
+    background-color: white;
+}

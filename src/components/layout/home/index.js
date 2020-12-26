@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../header';
+import Tabs from '../tabs';
 
 import style from './home.module.css';
 
@@ -9,6 +10,7 @@ function HomeLayout(props) {
 
     return <div className={style.home}>
         <Header />
+        <Tabs />
         {props.children}
     </div>
 }
