@@ -1,6 +1,6 @@
 
-import { FRIEND_DB_IDENTIFIER, GROUP_DB_IDENTIFIER, INVITATION_DB_IDENTIFIER } from '../constants';
-import { put, get } from './pouchdb';
+import { FRIEND_DB_IDENTIFIER, GROUP_DB_IDENTIFIER, INVITATION_DB_IDENTIFIER } from '../src/constants';
+import { put, get } from '../src/database/pouchdb';
 
 const dumpData = async function(data, identifier) {
     let doc;
