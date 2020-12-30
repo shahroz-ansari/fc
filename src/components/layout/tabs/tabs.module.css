@@ -1,5 +1,6 @@
 .tabs {
     display: flex;
+    position: relative;
     background-color: #009688;
     box-shadow: 0px 15px 20px -15px rgba(0, 0, 0, 0.4);
     /* box-shadow: 0px 15px 10px -15px #aaa; */
@@ -15,6 +16,13 @@
 }
 
 .active {
-    border-bottom: 3px solid #fff;
     color: #fff;
+}
+
+.slider {
+    height: 3px;
+    background-color: #fff;
+    position:absolute;
+    bottom: 0;
+    transition: left .3s ease;
 }
