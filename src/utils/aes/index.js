@@ -1,6 +1,6 @@
-
 import aesjs from 'aes-js';
 
+const encryptionKey = process.env.REACT_APP_ENCRYPTION_KEY;
 
 export const createAESKeys = (_genesis) => {
     let genesis = _genesis || '';
@@ -15,10 +15,13 @@ export const createAESKeys = (_genesis) => {
     return [encryptionKey, initVector];
 };
 
+export const aesEncrypt = (text, eKey, iv) => {
+    if (!eKey || !iv) {
+        [eKey, iv] = createAESKeys(encryptionKey);
+    }
 
-export const aesEncrypt = (text, keyStr, ivStr) => {
-    const key = aesjs.utils.utf8.toBytes(keyStr);
-    const iv = aesjs.utils.utf8.toBytes(ivStr);
+    const key = aesjs.utils.utf8.toBytes(eKey);
+    const iv = aesjs.utils.utf8.toBytes(iv);
     const textBytes = aesjs.utils.utf8.toBytes(text);
     const textBytesPadded = aesjs.padding.pkcs7.pad(textBytes);
     // eslint-disable-next-line new-cap
