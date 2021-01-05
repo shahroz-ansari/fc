@@ -12,6 +12,11 @@
     height: 60px;
     border-radius: 50%;
     background-color: rgba(233, 122, 255, 0.24);
+    overflow: hidden;
+}
+
+.image {
+    width: 60px
 }
 
 .info_box {

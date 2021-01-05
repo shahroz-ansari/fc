@@ -1,8 +1,6 @@
 import React from 'react';
-
 import authStyle from './auth.module.css'
 import LoginWithGoogle from '../../core/loginWithGoogle';
-import { authentication } from '../../../store/common';
 
 function AuthenticationView() {
 
@@ -12,7 +10,7 @@ function AuthenticationView() {
                 <span className={authStyle.logo}>Fc</span>
             </div>
             <div className={authStyle.authButtonSection}>
-                <LoginWithGoogle authenticateGoogleToken={authentication.authenticateGoogleToken} />
+                <LoginWithGoogle />
             </div>
         </div>
     )
