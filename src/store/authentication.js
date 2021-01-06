@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { getAuthToken } from "../utils";
+import { getAuthToken } from "../utils/ls";
 
 export const authentication = (function() {
     const initialState = getAuthToken() ? true : false;

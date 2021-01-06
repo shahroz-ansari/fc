@@ -13,6 +13,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.imagePreview {
+    width: 80px
+}
+
+.fileInput {
+    display: none;
 }
 
 .input {
