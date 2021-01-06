@@ -1,4 +1,5 @@
 import { aesEncrypt, aesDecrypt } from "../aes";
+import { FC_AUTH_TOKEN, FC_DATA } from '../../const';
 
 export const getAuthToken = () => {
     return localStorage.getItem(FC_AUTH_TOKEN);
