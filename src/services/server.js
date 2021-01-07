@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuthToken } from '../utils'
+import { getAuthToken } from '../utils/ls';
 
 
 //setting up base url for axios request

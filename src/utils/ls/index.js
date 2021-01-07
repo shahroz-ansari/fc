@@ -22,3 +22,8 @@ export const getFcData = () => {
     const data = aesDecrypt(encryptedData)
     return JSON.parse(data)
 }
+
+export const clearLocalStorage = () =>{
+    localStorage.removeItem(FC_AUTH_TOKEN);
+    localStorage.removeItem(FC_DATA);
+}
