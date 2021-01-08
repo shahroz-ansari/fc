@@ -4,11 +4,11 @@ export default function LoginWithGoogle(props) {
 
     const onSuccessLogin = function(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
-        props.authenticateGoogleToken(id_token);
+        props.successCallback(id_token);
     }
 
     const onFailureLogin = function(err) {
-        console.log(err)
+        props.failureCallback();
     }
 
     return <GoogleLogin
