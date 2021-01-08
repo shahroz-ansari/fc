@@ -1,4 +1,5 @@
 import PouchDB from 'pouchdb';
+import {getFcData} from '../../utils/ls'
 
 class FcPouchDB {
     constructor(dbName) {
@@ -16,14 +17,15 @@ class FcPouchDB {
 
     getRemote() {
         // get creads from localstorage
-        const syncGateway = 'http://shahroz.site:5984';
-        const username = '9eedd37897fcfb14233a708588dc06e2dedd7762'
-        const password = 'd3df79c89f9fa11cb505c759bf6683981c28dadd'
+        const FcData = getFcData();
+        if(!FcData) return null;
+        const {syncGatewayProtocol,syncGatewayHost,syncGatewayPort,syncGatewayUser,syncGatewayPass} = FcData;
+        const syncGateway = `${syncGatewayProtocol}://${syncGatewayHost}:${syncGatewayPort}`;
 
         return new PouchDB(`${syncGateway}/${this.dbName}`, {
             auth: {
-                username,
-                password
+                username:syncGatewayUser,
+                password:syncGatewayPass
             }
         })
     }
@@ -37,6 +39,12 @@ class FcPouchDB {
         }
 
         this.remote = this.getRemote();
+        if(!this.remote){
+            console.error('Error in getting remote credentials');
+            return;
+        }
+
+        
 
         this.db.sync(this.remote, {
             live: true,
