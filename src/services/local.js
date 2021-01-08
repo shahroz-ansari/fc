@@ -8,7 +8,10 @@ export const _getGroups = async () => {
             attachments: true
         })
 
-        return result.rows.map( row => row.doc)
+        return result.rows.map( row => row.doc).filter(row=>{
+            if(!row._id || row._id.includes('_design')) return false;
+            return true;
+        })
     } catch(error) {
         console.log(error);
         return null
@@ -26,9 +29,9 @@ export const _createGroup = async (title, picture = null) => {
                     data: picture
                 }
             },
-            adminId: '9eedd37897fcfb14233a708588dc06e2dedd7762',
+            adminId: 'd7a6f2c6e43181752a1fd2c45285eceb0f8d89ab',
             title,
-            users: ['9eedd37897fcfb14233a708588dc06e2dedd7762'],
+            users: ['d7a6f2c6e43181752a1fd2c45285eceb0f8d89ab'],
         })
 
         return result

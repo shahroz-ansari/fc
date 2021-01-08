@@ -2,14 +2,31 @@ import FcPouchDB from "../fcPouch";
 import { syncInprocessGroups, syncUpdateGroups } from "../../store/db";
 
 const groupsDbName = process.env.REACT_APP_GROUPS_DB_NAME
-const groupsServerFilter = 'groups/only_mine'
+const groupsServerFilter = 'groups/only_mine';
+
+const groupsDesignDoc = {
+    _id: "_design/groups",
+    filters: {
+        only_mine: String(
+            function (doc, req) {
+                return true;
+            }
+        )
+    }
+}
 
 class GroupsDB extends FcPouchDB {
     constructor() {
-        super(groupsDbName)
+        super(groupsDbName);
+
     }
 
-    sync() {
+    async sync() {
+        try{
+            await super.setLocalDesignDoc(groupsDesignDoc);
+        }catch(err){
+            console.log('err in sync',err);
+        }
         super.sync(
             groupsServerFilter,
             this.onNewChanges,
@@ -17,6 +34,7 @@ class GroupsDB extends FcPouchDB {
             this.onSyncActive,
             this.onSyncActive
         );
+        
     }
 
     onNewChanges(info) {
