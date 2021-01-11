@@ -44,9 +44,21 @@ class FcPouchDB {
             return;
         }
 
-        
+        this.db.replicate.to(this.remote, {
+            live: true,
+            retry: true
+        })
+        .on('change', change)
+        .on('paused', paused)
+        .on('active', active)
+        .on('denied', error)
+        .on('error', error)
+        .on('complete', (info) => {
+            console.log(this.dbName, 'complete', info);
+            // handle complete
+        });
 
-        this.db.sync(this.remote, {
+        this.db.replicate.from(this.remote, {
             live: true,
             retry: true,
             filter

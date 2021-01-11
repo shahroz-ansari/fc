@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Style from './groupItem.module.css';
 
 function GroupItem({ picture, title, lastMessage, unreadCount}) {
+    const [icon, setIcon] = useState(null)
+    useEffect(() => {
+        if (picture.data) {
+            setIcon(`data:${picture.content_type};base64,${picture.data}`)
+        } else {
+            setIcon(picture)
+        }
+    }, [picture])
     return (
         <div className={Style.item}>
             <div className={Style.image_box}>
                 {
-                    picture && <img src={picture} className={Style.image} alt={picture} />
+                    icon && <img src={icon} className={Style.image} alt={'Icon'} />
                 }
            </div>
             <div className={Style.info_box}>
