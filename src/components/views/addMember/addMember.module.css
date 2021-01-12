@@ -1,20 +1,14 @@
-.create_group {
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.input_Box {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    border-bottom: 1px solid #aaa;
 }
-
-.image_box {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: rgba(122, 142, 255, 0.24);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .input {
     border: none;
     border-bottom: 1px solid #009688;
@@ -26,10 +20,6 @@
     padding: 8px 4px;
     margin-top: 20px;
 }
-.input::placeholder {
-    color: #4446;
-}
-
 .button {
     border: none;
     outline: none;
