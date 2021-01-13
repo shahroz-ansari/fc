@@ -1,13 +1,26 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import Image from '../../core/svgIcons/image';
 import Style from './createGroup.module.css';
 import { _createGroup } from '../../../services/local';
+import { tabsState, headerState } from '../../../store/layout';
 
 function CreateGroup(props) {
     const [groupName, setGroupName] = useState('');
     const [file, setFile] = useState(null);
     const [filePreviewUrl, setFilePreviewUrl] = useState(null);
     const fileRef = useRef();
+    
+    useEffect(() => {
+        const tabsPrevState = tabsState.value;
+        const headerPrevState = headerState.value;
+
+        tabsState.next({...tabsPrevState, show: false})
+        headerState.next({...headerPrevState, logo: false, text: 'Create Group', goBack: true})
+        return () => {
+            tabsState.next(tabsPrevState);
+            headerState.next(headerPrevState);
+        }
+    }, [])
 
     const handleChange = useCallback((event) => {
         const value = event.target.value
