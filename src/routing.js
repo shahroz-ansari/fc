@@ -20,7 +20,7 @@ function Routing({ authenticated }) {
             <Route path="/groups" exact component={GroupsView} />
             <Route path="/invitations" exact render={() => 'In Progress...'} />
             <Route path="/groups/create" exact component={CreateGroup} />
-            <Route path="/groups/addMember" exact component={AddMember} />
+            <Route path="/groups/:groupId/addMember" exact component={AddMember} />
           </Switch>
         </HomeLayout> : <Switch>
           <Route path="/" component={AuthenticationView} />

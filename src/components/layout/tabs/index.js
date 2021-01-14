@@ -1,9 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import Style from './tabs.module.css';
+import { useHistory, useLocation } from 'react-router-dom';
+import { tabsState } from '../../../store/layout';
 
 function Tabs() {
-    const [activeTab, setActiveTab] = useState(1);
+    const [state, setState] = useState(tabsState.value)
+    const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        const subscription = tabsState.subscribe(setState)
+
+        return () => {
+            subscription.unsubscribe();
+        }
+    }, [])
+
+    useEffect(() => {
+        switch(location.pathname) {
+            case '/groups': tabsState.next({ show: true,  active: 'groups'}); break;
+            case '/invitations': tabsState.next({ show: true,  active: 'invitations'}); break;
+            default: tabsState.next({ show: false });
+        }
+    }, [location])
+
     const sliderRef = useRef(null);
     const tabsRef = useRef(null);
 
@@ -28,24 +49,24 @@ function Tabs() {
         sliderRef.current.style.width = width;
         sliderRef.current.style.left = position;
     }
+
+    if (!state.show) {
+        return null;
+    }
     return (
         <div className={Style.tabs} ref={tabsRef}>
             <div className={Style.slider} ref={sliderRef}></div>
-            <div className={`${Style.tab} ${activeTab === 1 ? Style.active : '' }`}
+            <div className={`${Style.tab} ${state.active === 'groups' ? Style.active : '' }`}
                 onClick={(e) => {
                     setSlider(e)
-                    setActiveTab(1);
+                    history.push('/groups');
                 }}>Groups</div>
-            <div id="test" className={`${Style.tab} ${activeTab === 2 ? Style.active : '' }`}
+            <div id="test" className={`${Style.tab} ${state.active === 'invitations' ? Style.active : '' }`}
                 onClick={(e) => {
                     setSlider(e)
-                    setActiveTab(2);
+                    history.push('/invitations');
+                    
                 }}>Invitations</div>
-            <div className={`${Style.tab} ${activeTab === 3 ? Style.active : '' }`}
-                onClick={(e) => {
-                    setSlider(e)
-                    setActiveTab(3);
-                }}>Friends</div>
         </div>
     )
 }
