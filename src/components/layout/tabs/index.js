@@ -29,19 +29,21 @@ function Tabs() {
     const tabsRef = useRef(null);
 
     useEffect(() => {
-        const testSlider = () => {
-            const activeEl = tabsRef.current.querySelector(`.${Style.active}`);
-            sliderRef.current.style.left = `${activeEl.offsetLeft}px`;
-            sliderRef.current.style.width = `${activeEl.offsetWidth}px`;
+        const tabsSlider = () => {
+            if(tabsRef.current) {
+                const activeEl = tabsRef.current.querySelector(`.${Style.active}`);
+                sliderRef.current.style.left = `${activeEl.offsetLeft}px`;
+                sliderRef.current.style.width = `${activeEl.offsetWidth}px`;
+            }
         };
         
-        testSlider();
-        window.addEventListener('resize', testSlider);
+        tabsSlider();
+        window.addEventListener('resize', tabsSlider);
         
         return () => {
-            window.removeEventListener('resize', testSlider);
+            window.removeEventListener('resize', tabsSlider);
         }
-    }, []);
+    }, [state]);
 
     function setSlider(e) {
         const width = e.target.offsetWidth + 'px';

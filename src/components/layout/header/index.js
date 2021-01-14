@@ -22,9 +22,9 @@ function Header() {
         <div className={Style.header}>
             {
                 !state.logo ? <>
-                    <span  onClick={history.goBack}>
+                    <div className={Style.box} onClick={history.goBack}>
                         <BackButton style={Style.go_back}/>
-                    </span>
+                    </div>
                     <div className={Style.channel}>
                         { state.text && 
                             <div className={Style.channel_name}>{state.text}</div>
@@ -35,7 +35,9 @@ function Header() {
                     </div>
                 </> : <div className={Style.logo}>Fc</div>
             }
-            <MenuDots style={Style.menu} />
+            <div className={Style.box}>
+                <MenuDots style={Style.menu} />
+            </div>
         </div>
     )
 }
