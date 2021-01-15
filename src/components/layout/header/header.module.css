@@ -5,10 +5,12 @@
     align-items: center;
     box-shadow: 2px 1px 10px #3b383855;
 }
+.box {
+    display: flex;
+}
 .go_back, .menu {
     cursor: pointer;
     padding: 5px;
-    /* border: 1px solid red; */
 }
 .logo {
     font-size: 35px;
