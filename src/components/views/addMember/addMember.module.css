@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
 }
-.input_Box {
+.formContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,4 +30,5 @@
     border-radius: 5px;
     margin-top: 20px;
     letter-spacing: 1px;
+    cursor: pointer;
 }

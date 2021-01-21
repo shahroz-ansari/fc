@@ -16,6 +16,17 @@ export const _getGroups = async () => {
     }
 }
 
+export const _getGroup = async (id) => {
+    try {
+        const result = await _groupsdb.db.get(id)
+
+        return result
+    } catch(error) {
+        console.log(error);
+        return null
+    }
+}
+
 export const _createGroup = async (title, picture = null) => {
     try {
         const FcData = getFcData();

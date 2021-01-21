@@ -2,7 +2,7 @@ import React from 'react';
 
 import Style from './member.module.css';
 
-function Member({ picture, title}) {
+function Member({ picture, name, status, handleAdd}) {
     return (
         <div className={Style.item}>
             <div className={Style.image_box}>
@@ -10,14 +10,19 @@ function Member({ picture, title}) {
                     picture && <img src={picture} className={Style.image} alt={picture} />
                 }
             </div>
-            <div className={Style.name}>{title}</div>
-            <button className={Style.addButton} onClick={() => {console.log('added')}}>Add</button>
+            <div className={Style.name}>{name}</div>
+            {
+                status === 0 &&
+                <button className={Style.addButton} onClick={handleAdd}>Add</button>
+            }
         </div>
     )
 }
 
 Member.defaultProps = {
     picture: '',
-    title: 'Member Name',
+    name: '',
+    handleAdd: () => {},
+    status: 0 // 0 can add, 1 already added, 2 add request already sent
 }
 export default Member;
