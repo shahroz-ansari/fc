@@ -24,7 +24,7 @@ axios.interceptors.request.use(function (config) {
 
 export const handleGoogleAuth = (idToken) => {
     return new Promise((resolve, reject) => {
-        axios.get('/fc/v1/auth/authenticate/google', {
+        axios.get('auth/authenticate/google', {
             headers: {
                 Authorization: `Bearer ${idToken}`
             }
@@ -41,7 +41,16 @@ export const handleGoogleAuth = (idToken) => {
             reject(err);
         })
     });
+}
 
-
+export const searchUser = (username) => {
+    return new Promise((resolve, reject) => {
+        axios.get('common/search/user/' + username).then(res => {
+            resolve(res.data);
+        }).catch(err => {
+            console.error('error in res', err);
+            reject(err);
+        })
+    });
 }
 
