@@ -7,11 +7,11 @@ import Smiley2 from '../../core/svgIcons/smiley2';
 import Send from '../../core/svgIcons/send';
 
 function Chats() {
-    function handleBahavior(maxHeight, paddingTopBottom) {
+    function handleBahavior(max, ptb) {
         let prevTextLength;
         let baseHeight;
 
-        return (e, max = maxHeight || 100, ptb = paddingTopBottom) => {
+        return (e) => {
             const el = e.target;
             baseHeight === undefined && (baseHeight = el.clientHeight)
             el.textLength < prevTextLength && (el.style.height = `${baseHeight - ptb}px`)
