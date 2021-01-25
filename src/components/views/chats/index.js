@@ -7,8 +7,23 @@ import Smiley2 from '../../core/svgIcons/smiley2';
 import Send from '../../core/svgIcons/send';
 
 function Chats() {
-    const setHeight = (el) => {
-        // handle textarea behaviour here..
+    function handleBahavior(maxHeight, paddingTopBottom) {
+        let prevTextLength;
+        let baseHeight;
+
+        return (e, max = maxHeight || 100, ptb = paddingTopBottom) => {
+            const el = e.target;
+            baseHeight === undefined && (baseHeight = el.clientHeight)
+            el.textLength < prevTextLength && (el.style.height = `${baseHeight - ptb}px`)
+            
+            if(ptb !== undefined) {
+                const height = el.scrollHeight - ptb;
+                console.log(height, ptb, el.scrollHeight, el.scrollHeight - ptb)
+                el.style.height = height <= max ? `${height}px` : `${max}px`;
+            }
+            prevTextLength = el.textLength;
+        }
+
     }
 
     return (
@@ -31,7 +46,7 @@ function Chats() {
                     <Smiley2 className={style.icons} fill={'#888'} />
                         <textarea
                             className={style.input} 
-                            onChange={(e) => { setHeight(e.target) }} 
+                            onChange={handleBahavior(100, 4)}
                             rows={1} 
                             cols={10}
                             placeholder={'Type a message'}>
