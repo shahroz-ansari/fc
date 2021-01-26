@@ -7,6 +7,7 @@ import AuthenticationView from "./components/views/auth";
 import GroupsView from "./components/views/groups";
 import CreateGroup from "./components/views/createGroup";
 import AddMember from "./components/views/addMember";
+import Chats from "./components/views/chats";
 
 function Routing({ authenticated }) {
 
@@ -21,6 +22,7 @@ function Routing({ authenticated }) {
             <Route path="/invitations" exact render={() => 'In Progress...'} />
             <Route path="/groups/create" exact component={CreateGroup} />
             <Route path="/groups/:groupId/addMember" exact component={AddMember} />
+            <Route path="/groups/chats" exact component={Chats} />
           </Switch>
         </HomeLayout> : <Switch>
           <Route path="/" component={AuthenticationView} />
