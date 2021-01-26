@@ -12,7 +12,7 @@ axios.interceptors.request.use(function (config) {
         config.headers = {
             'Authorization': `Bearer ${authToken}`,
             'Accept': 'application/json',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         }
     }
     return config;
@@ -52,5 +52,20 @@ export const searchUser = (username) => {
             reject(err);
         })
     });
+}
+
+export const addMemberToGroup = (userFcId, groupId, requester) => {
+    return new Promise((resolve, reject) => {
+
+        axios.post('db/invitation/add', {
+            userFcId,
+            groupId,
+            requester
+        }).then(res => {
+            resolve(res.data);
+        }).catch(err => {
+            reject(err);
+        })
+    })
 }
 
