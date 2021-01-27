@@ -1,0 +1,33 @@
+.item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #00968811;
+    margin: 0 20px;
+    padding: 10px 0;
+}
+
+.image_box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(173, 173, 173, 0.24);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.image {
+    width: 60px
+}
+.name {
+    flex-grow: 1;
+    margin: 0 10px;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #444;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+.close {
+    margin-right: 5px;
+}
