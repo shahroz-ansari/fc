@@ -58,11 +58,14 @@ class FcPouchDB {
             // handle complete
         });
 
-        this.db.replicate.from(this.remote, {
+        const replicateOptions = {
             live: true,
-            retry: true,
-            filter
-        })
+            retry: true
+        }
+
+        if (filter) { replicateOptions.filter = filter };
+
+        this.db.replicate.from(this.remote, replicateOptions)
         .on('change', change)
         .on('paused', paused)
         .on('active', active)
