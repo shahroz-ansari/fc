@@ -23,7 +23,7 @@ function Routing({ authenticated }) {
             <Route path="/invitations" exact component={Invitations} />
             <Route path="/groups/create" exact component={CreateGroup} />
             <Route path="/groups/:groupId/addMember" exact component={AddMember} />
-            <Route path="/groups/chats" exact component={Chats} />
+            <Route path="/groups/:groupId/chats" exact component={Chats} />
           </Switch>
         </HomeLayout> : <Switch>
           <Route path="/" component={AuthenticationView} />
