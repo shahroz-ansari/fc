@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import Style from './groupItem.module.css';
 
-function GroupItem({ picture, title, lastMessage, unreadCount}) {
+function GroupItem({ picture, title, lastMessage, unreadCount, redirect}) {
     const [icon, setIcon] = useState(null)
+
     useEffect(() => {
         if (picture.data) {
             setIcon(`data:${picture.content_type};base64,${picture.data}`)
@@ -11,8 +12,9 @@ function GroupItem({ picture, title, lastMessage, unreadCount}) {
             setIcon(picture)
         }
     }, [picture])
+
     return (
-        <div className={Style.item}>
+        <div className={Style.item} onClick={redirect}>
             <div className={Style.image_box}>
                 {
                     icon && <img src={icon} className={Style.image} alt={'Icon'} />
