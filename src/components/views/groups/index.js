@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 
 import Style from './groups.module.css';
@@ -10,6 +10,7 @@ import { syncUpdateGroups } from '../../../store/db';
 import { _getGroups } from '../../../services/local';
 
 function GroupsView() {
+    const history = useHistory();
     const [groups, setGroups] = useState([])
 
     useEffect(() => {
@@ -27,6 +28,10 @@ function GroupsView() {
         }
     }, [])
 
+    function redirectToChats(groupId) {
+        history.push(`groups/${groupId}/chats`);
+    }
+
     return (
         <Fragment>
             <div className={Style.groups_view}>
@@ -34,6 +39,7 @@ function GroupsView() {
                     groups.map( group => 
                         <GroupItem 
                             key={group._id}
+                            redirect={() => redirectToChats(group._id)}
                             picture={group.picture || (group._attachments && group._attachments.picture)}
                             title={group.title}
                             lastMessage={''}
