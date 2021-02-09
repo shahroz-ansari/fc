@@ -4,7 +4,7 @@ import Routing from './routing'
 
 import { authentication } from "./store/authentication";
 import { syncUpdateGroups } from "./store/db";
-import { _groupsdb, _chatDb } from "./database";
+import { _groupsdb, _chatDb, _usersDb } from "./database";
 import { _getGroupIds } from "./services/local";
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       if (authenticated) {
         // initiating sync on authenticated
         _groupsdb.sync();
+        _usersDb.sync();
 
         // update local state
         setIsAuthenticated(true)
