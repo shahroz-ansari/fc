@@ -18,6 +18,24 @@ export const syncUpdateGroups = (function() {
     }
 })()
 
+export const syncInprocessUsers = (function() {
+    const subject = new BehaviorSubject(false);
+    return {
+        value: subject.value,
+        next: (value) => subject.next(value),
+        subscribe: callback => subject.subscribe(callback)
+    }
+})()
+
+export const syncUpdateUsers = (function() {
+    const subject = new BehaviorSubject(false);
+    return {
+        value: subject.value,
+        next: (value) => subject.next(value),
+        subscribe: callback => subject.subscribe(callback)
+    }
+})()
+
 export const syncUpdateChats = (function() {
     const subject = new BehaviorSubject([]);
     return {

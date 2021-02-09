@@ -6,7 +6,7 @@ function GroupItem({ picture, title, lastMessage, unreadCount, redirect}) {
     const [icon, setIcon] = useState(null)
 
     useEffect(() => {
-        if (picture.data) {
+        if (picture && picture.data) {
             setIcon(`data:${picture.content_type};base64,${picture.data}`)
         } else {
             setIcon(picture)
