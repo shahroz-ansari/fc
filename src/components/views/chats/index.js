@@ -5,11 +5,16 @@ import Attachment from '../../core/svgIcons/attachment';
 import Camera from '../../core/svgIcons/camera';
 import Smiley2 from '../../core/svgIcons/smiley2';
 import Send from '../../core/svgIcons/send';
+import ChatBubble from '../../core/chatBubble';
+import { syncUpdateChats } from '../../../store/db';
+import { useParams } from 'react-router-dom';
+import { _getGroupChats } from '../../../services/local';
 
 function Chats() {
     const textareaRef = useRef(null);
-    const [chats, setChats] = useState(['defualt Text message']);
+    const [chats, setChats] = useState([]);
     const [text, setText] = useState('');
+    const { groupId } = useParams();
 
     const handleInputBahavior = useCallback(
         ((max, ptb) => {
@@ -35,18 +40,33 @@ function Chats() {
         handleInputBahavior();
     }, [chats, text])
 
+    useEffect(() => {
+        const updateNewChats = async function() {
+            const groupChats = await _getGroupChats(groupId);
+            groupChats && setChats(groupChats);
+        }
+        updateNewChats();
+
+        const updateChatsCallback = function(updates) {
+            if(updates.indexOf(groupId) > -1){
+                syncUpdateChats.remove(groupId);
+
+                updateNewChats();
+            }
+        };
+
+        const subscription = syncUpdateChats.subscribe(updateChatsCallback);
+
+        return () => {
+            subscription.unsubscribe();
+        }
+    }, [groupId]);
+
     return (
         <div className={style.container}>
             <div className={style.chats}>
                 {
-                    chats.map((val, i) => {
-                        return <div className={style.bubble} key={i}>
-                            <div className={style.text}>{val}</div>
-                            <div className={style.info}>
-                                <div className={style.time}>1:05</div>
-                            </div>
-                        </div>
-                    })
+                    chats.map((val, i) => <ChatBubble message={'nnnn'} time={'10:20'} key={i} />)
                 }
             </div>
             <div className={style.footer}>

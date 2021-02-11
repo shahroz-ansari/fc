@@ -48,7 +48,7 @@ class GroupChats {
 
     groupsToSync(groups) {
         groups.forEach( id => {
-            if (!this.dbs[id]) {
+            if (id.indexOf('_design') < 0 && !this.dbs[id]) {
                 this.dbs[id] = new ChatsDB(id)
             } else {
                 console.log(id, 'already in sync')

@@ -1,0 +1,23 @@
+.bubble {
+    max-width: 90%;
+    margin: auto;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+    /* box-shadow: 2px 2px 5px #00000009; */
+}
+    .text {
+        color: #444;
+        padding: 10px;
+        padding-bottom: 0;
+    }
+    .info {
+        display: flex;
+        padding: 10px;
+        padding-top: 0px;
+
+        justify-content: flex-end;
+    }
+        .time {
+            color: #ccc;
+            font-size: 11px;
+        }
